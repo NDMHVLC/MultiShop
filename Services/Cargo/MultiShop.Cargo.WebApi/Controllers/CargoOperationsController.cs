@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Cargo.BusinessLayer.Abstract;
 using MultiShop.Cargo.DtoLayer.Dtos.CargoOperationDtos;
@@ -6,6 +7,7 @@ using MultiShop.Cargo.EntityLayer.Concrete;
 
 namespace MultiShop.Cargo.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CargoOperationsController : ControllerBase
@@ -39,7 +41,7 @@ namespace MultiShop.Cargo.WebApi.Controllers
 				OperationDate = createCargoOperationDto.OperationDate,
 			};
 			_cargoOperationService.TInsert(cargoOperation);
-			return Ok("");
+			return Ok("Kargo İşlemi Başarıyla Oluşturuldu");
 		}
 		[HttpPut]
 		public IActionResult UpdateCargoOperation(UpdateCargoOperationDto updateCargoOperationDto)
@@ -52,13 +54,13 @@ namespace MultiShop.Cargo.WebApi.Controllers
 				OperationDate = updateCargoOperationDto.OperationDate
 			};
 			_cargoOperationService.TUpdate(cargoOperation);
-			return Ok("");
+			return Ok("Kargo İşlemi Başarıyla Güncellendi");
 		}
 		[HttpDelete]
 		public IActionResult DeleteCargoOperation(int id)
 		{
 			_cargoOperationService.TDelete(id);
-			return Ok("");
+			return Ok("Kargo İşlemi Başarıyla Silindi");
 		}
 	}
 }

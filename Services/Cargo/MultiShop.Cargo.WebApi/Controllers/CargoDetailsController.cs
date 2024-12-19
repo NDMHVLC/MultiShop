@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Cargo.BusinessLayer.Abstract;
 using MultiShop.Cargo.DtoLayer.Dtos.CargoDetailDtos;
@@ -6,6 +7,7 @@ using MultiShop.Cargo.EntityLayer.Concrete;
 
 namespace MultiShop.Cargo.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CargoDetailsController : ControllerBase
@@ -40,7 +42,7 @@ namespace MultiShop.Cargo.WebApi.Controllers
 				SenderCustomer = cargoDetailDto.SenderCustomer
 			};
 			_cargoDetailService.TInsert(cargoDetail);
-			return Ok("cargoDetail");
+			return Ok("Kargo Detayları Başarıyla Oluşturuldu");
 		}
 		[HttpPut]
 		public IActionResult UpdateCargoDetail(UpdateCargoDetailDto vehicleDetailDto)
@@ -54,13 +56,13 @@ namespace MultiShop.Cargo.WebApi.Controllers
 				SenderCustomer= vehicleDetailDto.SenderCustomer
 			};
 			_cargoDetailService.TUpdate(cargoDetail);
-			return Ok("");
+			return Ok("Kargo Detayları Başarıyla Güncellendi");
 		}
 		[HttpDelete]
 		public IActionResult DeleteCargoDetail(int id)
 		{
 			_cargoDetailService.TDelete(id);
-			return Ok("");
+			return Ok("Kargo Detayları Başarıyla Silindi");
 		}
 	}
 }
