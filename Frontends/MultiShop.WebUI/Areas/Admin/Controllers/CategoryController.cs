@@ -22,8 +22,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 		{
 			ViewBag.v0 = " Kategori Sayfası";
 			ViewBag.v1 = " Ana Sayfa";
-			ViewBag.v2 = " Kategoriler";
-			ViewBag.v3 = " Kategori Listesi";
+			ViewBag.v2 = " Kategori Listesi";
+			ViewBag.v3 = " Kategori İşlemleri";
 
 			var client = _httpClientFactory.CreateClient();
 			var responseMessage = await client.GetAsync("https://localhost:7070/api/Categories");
@@ -61,7 +61,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 			return View();
 		}
 		[Route("DeleteCategory/{id}")]
-		[HttpDelete]
 		public async Task<IActionResult> DeleteCategory(string id)
 		{
 			var client = _httpClientFactory.CreateClient();
